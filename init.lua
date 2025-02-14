@@ -174,6 +174,9 @@ vim.keymap.set('n', '<leader>tn', function()
   vim.cmd 'set number!'
 end, { noremap = true, silent = true, desc = '[T]oggle line [n]umbers' })
 -- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -928,29 +931,29 @@ require('lazy').setup({
   --   'gerardbm/vim-atomic',
   --   name = 'atomic',
   -- },
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   priority = 1000,
-  --   -- init = function()
-  --   --   vim.cmd.colorscheme 'catppuccin-mocha'
-  --   -- end,
-  --   opts = {
-  --     transparent_background = true,
-  --     background = {
-  --       dark = 'mocha',
-  --       light = 'mocha',
-  --     },
-  --     mini = {
-  --       enabled = true,
-  --       indentscope_color = '',
-  --     },
-  --     treesitter = true,
-  --     telescope = {
-  --       enabled = true,
-  --     },
-  --   },
-  -- },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    -- init = function()
+    --   vim.cmd.colorscheme 'catppuccin-mocha'
+    -- end,
+    opts = {
+      transparent_background = true,
+      background = {
+        dark = 'mocha',
+        light = 'mocha',
+      },
+      mini = {
+        enabled = true,
+        indentscope_color = '',
+      },
+      treesitter = true,
+      telescope = {
+        enabled = true,
+      },
+    },
+  },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -1075,36 +1078,36 @@ require('lazy').setup({
   },
 })
 --
--- vim.cmd.colorscheme 'catppuccin-mocha'
+vim.cmd.colorscheme 'catppuccin-mocha'
 -- vim.cmd.colorscheme 'vesper'
 -- vim.cmd.colorscheme 'atomic'
--- vim.api.nvim_create_autocmd('VimEnter', {
---   callback = function()
---     if vim.env.TMUX then
---       vim.g.clipboard = {
---         name = 'tmux',
---         copy = {
---           ['+'] = 'tmux load-buffer -',
---           ['*'] = 'tmux load-buffer -',
---         },
---         paste = {
---           ['+'] = 'tmux save-buffer -',
---           ['*'] = 'tmux save-buffer -',
---         },
---         cache_enabled = false,
---       }
---       vim.opt.clipboard = 'unnamedplus'
---       print 'Tmux clipboard configured'
---     else
---       print 'Not in tmux session'
---     end
---   end,
--- })
--- vim.api.nvim_create_autocmd('TextYankPost', {
---   callback = function()
---     if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
---       vim.fn.system('tmux load-buffer -', vim.fn.getreg '+')
---     end
---   end,
--- })
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    if vim.env.TMUX then
+      vim.g.clipboard = {
+        name = 'tmux',
+        copy = {
+          ['+'] = 'tmux load-buffer -',
+          ['*'] = 'tmux load-buffer -',
+        },
+        paste = {
+          ['+'] = 'tmux save-buffer -',
+          ['*'] = 'tmux save-buffer -',
+        },
+        cache_enabled = false,
+      }
+      vim.opt.clipboard = 'unnamedplus'
+      print 'Tmux clipboard configured'
+    else
+      print 'Not in tmux session'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
+      vim.fn.system('tmux load-buffer -', vim.fn.getreg '+')
+    end
+  end,
+})
 vim.o.diffopt = 'internal,filler,closeoff,linematch:60'
