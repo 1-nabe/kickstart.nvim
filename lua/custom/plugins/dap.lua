@@ -1,200 +1,177 @@
 return {
-  -- {
-  --   'mfussenegger/nvim-dap',
-  --   dependencies = {
-  --     'rcarriga/nvim-dap-ui',
-  --     'theHamsta/nvim-dap-virtual-text',
-  --     'nvim-neotest/nvim-nio',
-  --     'williamboman/mason.nvim',
-  --   },
-  --   config = function()
-  --     local dap = require 'dap'
-  --     local ui = require 'dapui'
-  --
-  --     require('dapui').setup()
-  --
-  --     -- require('nvim-dap-virtual-text').setup {
-  --     --   -- This just tries to mitigate the chance that I leak tokens here. Probably won't stop it from happening...
-  --     --   display_callback = function(variable)
-  --     --     local name = string.lower(variable.name)
-  --     --     local value = string.lower(variable.value)
-  --     --     if name:match 'secret' or name:match 'api' or value:match 'secret' or value:match 'api' then
-  --     --       return '*****'
-  --     --     end
-  --     --
-  --     --     if #variable.value > 15 then
-  --     --       return ' ' .. string.sub(variable.value, 1, 15) .. '... '
-  --     --     end
-  --     --
-  --     --     return ' ' .. variable.value
-  --     --   end,
-  --     -- }
-  --
-  --     -- Handled by nvim-dap-go
-  --     -- dap.adapters.go = {
-  --     --   type = "server",
-  --     --   port = "${port}",
-  --     --   executable = {
-  --     --     command = "dlv",
-  --     --     args = { "dap", "-l", "127.0.0.1:${port}" },
-  --     --   },
-  --     -- }
-  --     --
-  --     dap.adapters.codelldb = {
-  --       type = 'server',
-  --       port = '${port}',
-  --       executable = {
-  --         command = '/home/dev/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb', -- Adjust the path to your lldb-vscode
-  --         args = { '--port', '${port}' },
-  --       },
-  --       name = 'codelldb',
-  --     }
-  --
-  --     dap.configurations.cpp = {
-  --       {
-  --         name = 'Launch',
-  --         type = 'codelldb',
-  --         request = 'launch',
-  --         program = function()
-  --           return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-  --         end,
-  --         cwd = '${workspaceFolder}',
-  --         stopOnEntry = false,
-  --         args = {},
-  --         env = {
-  --           DS4_PATH = function()
-  --             return '/home/dev/ds4/ds4/home'
-  --           end,
-  --           DS4_APPLICATION_DIRECTORY = function()
-  --             return '/home/dev/ds4/ds4/git/build/bin/Debug'
-  --           end,
-  --           USAGE_STATISTIC_ACTIVE = function()
-  --             return 'false'
-  --           end,
-  --           DS_OPENTELEMETRY_TRACES_URL = function()
-  --             return 'https://otelcol.ds4.damp.local/v1/traces'
-  --           end,
-  --           DS_OPENTELEMETRY_METRICS_URL = function()
-  --             return 'https://otelcol.ds4.damp.local/v1/metrics'
-  --           end,
-  --           PGHOST = function()
-  --             return 'localhost'
-  --           end,
-  --           PGDATABASE = function()
-  --             return 'ds4'
-  --           end,
-  --           PGUSER = function()
-  --             return 'postgres'
-  --           end,
-  --           PGPASSWORD = function()
-  --             return 'test'
-  --           end,
-  --           DS_UPDATE_ACCEPT_DEV_KEYS = function()
-  --             return '1'
-  --           end,
-  --           DS_MFA_SERVER_URL = function()
-  --             return 'https://ds4-dev-local.damp.local:443'
-  --           end,
-  --           OPENSSL_MODULES = function()
-  --             return '/home/dev/ds4/ds4/git/build/bin/ossl-modules'
-  --           end,
-  --           EASYTI_HOST = function()
-  --             return 'ds4-dev-local-easyti.damp.local'
-  --           end,
-  --           DISABLE_SOLVI_JOB = function()
-  --             return '1'
-  --           end,
-  --           LICENSE_SETUP_TOKEN = function()
-  --             return ''
-  --           end,
-  --           LICENSE_SERVER_HOST = function()
-  --             return 'ds4-lizenz.ds4.damp.local'
-  --           end,
-  --           DS_WIREGUARD_URL = function()
-  --             return 'https://localhost'
-  --           end,
-  --           DS_EASYTI_MANAGER_URL = function()
-  --             return 'https://ds4-dev-local.damp.local'
-  --           end,
-  --           IMPORT_TRANSFER_DISABLE_BACKUP = function()
-  --             return '1'
-  --           end,
-  --           IMPORT_TRANSFER_SIMULATE_SHUTDOWN = function()
-  --             return '1'
-  --           end,
-  --           DS_SOLR_URL = function()
-  --             return 'http://localhost:8983/solr'
-  --           end,
-  --           DS_USE_LOW_AUTH_SECURITY_SETTINGS = function()
-  --             return 'true'
-  --           end,
-  --           HTML_SANITIZER = function()
-  --             return ''
-  --           end,
-  --           DS_SKIP_HILFE_INDEX = function()
-  --             return '1'
-  --           end,
-  --           -- Add more environment variables as needed
-  --         },
-  --         -- Additional configurations to avoid breaking on exceptions
-  --         -- setupCommands = {
-  --         --   {
-  --         --     text = '-interpreter-exec console "catch throw"',
-  --         --   },
-  --         --   {
-  --         --     text = '-interpreter-exec console "catch throw enable no"',
-  --         --   },
-  --         -- },
-  --       },
-  --     }
-  --
-  --     -- local elixir_ls_debugger = vim.fn.exepath 'elixir-ls-debugger'
-  --     -- if elixir_ls_debugger ~= '' then
-  --     --   dap.adapters.mix_task = {
-  --     --     type = 'executable',
-  --     --     command = elixir_ls_debugger,
-  --     --   }
-  --     --
-  --     --   dap.configurations.elixir = {
-  --     --     {
-  --     --       type = 'mix_task',
-  --     --       name = 'phoenix server',
-  --     --       task = 'phx.server',
-  --     --       request = 'launch',
-  --     --       projectDir = '${workspaceFolder}',
-  --     --       exitAfterTaskReturns = false,
-  --     --       debugAutoInterpretAllModules = false,
-  --     --     },
-  --     --   }
-  --     -- end
-  --
-  --     vim.keymap.set('n', '<space>b', dap.toggle_breakpoint)
-  --     vim.keymap.set('n', '<space>gb', dap.run_to_cursor)
-  --
-  --     -- Eval var under cursor
-  --     vim.keymap.set('n', '<space>?', function()
-  --       require('dapui').eval(nil, { enter = true })
-  --     end)
-  --
-  --     vim.keymap.set('n', '<F1>', dap.continue)
-  --     vim.keymap.set('n', '<F2>', dap.step_into)
-  --     vim.keymap.set('n', '<F3>', dap.step_over)
-  --     vim.keymap.set('n', '<F4>', dap.step_out)
-  --     vim.keymap.set('n', '<F5>', dap.step_back)
-  --     vim.keymap.set('n', '<F13>', dap.restart)
-  --
-  --     dap.listeners.before.attach.dapui_config = function()
-  --       ui.open()
-  --     end
-  --     dap.listeners.before.launch.dapui_config = function()
-  --       ui.open()
-  --     end
-  --     dap.listeners.before.event_terminated.dapui_config = function()
-  --       ui.close()
-  --     end
-  --     dap.listeners.before.event_exited.dapui_config = function()
-  --       ui.close()
-  --     end
-  --   end,
-  -- },
+  'mfussenegger/nvim-dap',
+  dependencies = {
+    'rcarriga/nvim-dap-ui',
+    'theHamsta/nvim-dap-virtual-text',
+    'nvim-neotest/nvim-nio',
+    'williamboman/mason.nvim',
+  },
+  config = function()
+    local dap = require 'dap'
+    local dapui = require 'dapui'
+
+    -- DAP UI setup
+    dapui.setup {
+      layouts = {
+        {
+          elements = {
+            { id = 'scopes', size = 0.25 },
+            { id = 'breakpoints', size = 0.25 },
+            { id = 'stacks', size = 0.25 },
+            { id = 'watches', size = 0.25 },
+          },
+          position = 'left',
+          size = 60,
+        },
+        {
+          elements = {
+            { id = 'repl', size = 0.25 },
+            { id = 'console', size = 0.75 },
+          },
+          position = 'bottom',
+          size = 30,
+        },
+      },
+      mappings = {
+        expand = { '<CR>', '<2-LeftMouse>' },
+        open = 'o',
+        remove = 'd',
+        edit = 's',
+        repl = 'r',
+        toggle = 't',
+      },
+    }
+
+    -- Automatically open dapui when debugging starts
+    dap.listeners.after.event_initialized['dapui_config'] = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated['dapui_config'] = function()
+      local current_config = dap.session().config
+      if current_config.name ~= 'DS4 Tests' then
+        dapui.close()
+      end
+    end
+    -- dap.listeners.before.event_exited['dapui_config'] = function()
+    --   dapui.close()
+    -- end
+
+    -- Configure cpp adapter
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = vim.fn.stdpath 'data' .. '/mason/packages/codelldb/extension/adapter/codelldb',
+        args = { '--port', '${port}' },
+      },
+    }
+
+    -- Configure cpp debugging
+    dap.configurations.cpp = {
+      {
+        name = 'Launch file',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        -- args = function()
+        --   local args_string = vim.fn.input 'Arguments: '
+        --   return vim.split(args_string, ' ')
+        -- end,
+        env = {
+          DS4_PATH = '/home/dev/ds4/ds4/home',
+          DS4_APPLICATION_DIRECTORY = '/home/dev/ds4/ds4/git/build/bin/Debug',
+          USAGE_STATISTIC_ACTIVE = 'false',
+          DS_OPENTELEMETRY_TRACES_URL = 'https://otelcol.ds4.damp.local/v1/traces',
+          DS_OPENTELEMETRY_METRICS_URL = 'https://otelcol.ds4.damp.local/v1/metrics',
+          PGHOST = 'localhost',
+          PGDATABASE = 'ds4',
+          PGUSER = 'postgres',
+          PGPASSWORD = 'test',
+          DS_UPDATE_ACCEPT_DEV_KEYS = '1',
+          DS_MFA_SERVER_URL = 'https://ds4-dev-local.damp.local:443',
+          OPENSSL_MODULES = '/home/dev/ds4/ds4/git/build/bin/ossl-modules',
+          EASYTI_HOST = 'ds4-dev-local-easyti.damp.local',
+          DISABLE_SOLVI_JOB = '1',
+          LICENSE_SETUP_TOKEN = '',
+          LICENSE_SERVER_HOST = 'ds4-lizenz.ds4.damp.local',
+          DS_WIREGUARD_URL = 'https://localhost',
+          DS_EASYTI_MANAGER_URL = 'https://ds4-dev-local.damp.local',
+          IMPORT_TRANSFER_DISABLE_BACKUP = '1',
+          IMPORT_TRANSFER_SIMULATE_SHUTDOWN = '1',
+          DS_SOLR_URL = 'http://localhost:8983/solr',
+          DS_USE_LOW_AUTH_SECURITY_SETTINGS = 'true',
+          HTML_SANITIZER = '',
+          DS_SKIP_HILFE_INDEX = '1',
+        },
+      },
+      {
+        name = 'DS4 Tests',
+        type = 'codelldb',
+        request = 'launch',
+        program = '/home/dev/ds4/ds4/git/build/bin/ds4b-tests-app-ds4',
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = function()
+          local test_pattern = vim.fn.input 'Test pattern (--only=): '
+          if test_pattern ~= '' then
+            return { '--only=' .. test_pattern, '--reporter=singleline' }
+          else
+            return { '--reporter=singleline' }
+          end
+        end,
+        env = {
+          DS4_PATH = '/home/dev/ds4/ds4/home',
+          DS4_APPLICATION_DIRECTORY = '/home/dev/ds4/ds4/git/build/bin/Debug',
+          USAGE_STATISTIC_ACTIVE = 'false',
+          DS_OPENTELEMETRY_TRACES_URL = 'https://otelcol.ds4.damp.local/v1/traces',
+          DS_OPENTELEMETRY_METRICS_URL = 'https://otelcol.ds4.damp.local/v1/metrics',
+          PGHOST = 'localhost',
+          PGDATABASE = 'ds4',
+          PGUSER = 'postgres',
+          PGPASSWORD = 'test',
+          DS_UPDATE_ACCEPT_DEV_KEYS = '1',
+          DS_MFA_SERVER_URL = 'https://ds4-dev-local.damp.local:443',
+          OPENSSL_MODULES = '/home/dev/ds4/ds4/git/build/bin/ossl-modules',
+          EASYTI_HOST = 'ds4-dev-local-easyti.damp.local',
+          DISABLE_SOLVI_JOB = '1',
+          LICENSE_SETUP_TOKEN = '',
+          LICENSE_SERVER_HOST = 'ds4-lizenz.ds4.damp.local',
+          DS_WIREGUARD_URL = 'https://localhost',
+          DS_EASYTI_MANAGER_URL = 'https://ds4-dev-local.damp.local',
+          IMPORT_TRANSFER_DISABLE_BACKUP = '1',
+          IMPORT_TRANSFER_SIMULATE_SHUTDOWN = '1',
+          DS_SOLR_URL = 'http://localhost:8983/solr',
+          DS_USE_LOW_AUTH_SECURITY_SETTINGS = 'true',
+          HTML_SANITIZER = '',
+          DS_SKIP_HILFE_INDEX = '1',
+        },
+      },
+    }
+
+    -- Keymaps
+    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Toggle [b]reakpoint' })
+    vim.keymap.set('n', '<leader>gb', dap.run_to_cursor, { desc = 'Run to cursor' })
+    vim.keymap.set('n', '<leader>gp', dap.up, { desc = '[G]o stack u[p]' })
+    vim.keymap.set('n', '<leader>gn', dap.down, { desc = '[G]o stack dow[n]' })
+    vim.keymap.set('n', '<space>?', function()
+      require('dapui').eval(nil, { enter = true })
+    end)
+    vim.keymap.set('n', '<F1>', dap.continue)
+    vim.keymap.set('n', '<F2>', dap.step_into)
+    vim.keymap.set('n', '<F3>', dap.step_over)
+    vim.keymap.set('n', '<F4>', dap.step_out)
+    vim.keymap.set('n', '<F5>', dap.step_back)
+    vim.keymap.set('n', '<F7>', dap.restart)
+
+    -- Additional helpful keymaps
+    vim.keymap.set('n', '<leader>dt', dapui.toggle, { desc = '[D]ebug UI [T]oggle' })
+    vim.keymap.set('n', '<leader>dx', function()
+      dap.terminate()
+      dapui.close()
+    end, { desc = '[D]ebug Stop/[X]it' })
+  end,
 }

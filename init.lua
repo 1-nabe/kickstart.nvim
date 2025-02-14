@@ -640,6 +640,14 @@ require('lazy').setup({
           },
         },
         codelldb = {},
+        jsonls = {},
+        -- rust_analyzer = {
+        --   ['rust-analyzer'] = {
+        --     checkOnSave = {
+        --       command = 'clippy',
+        --     },
+        --   },
+        -- },
         -- clang_format = {},
         -- gopls = {},
         -- pyright = {},
@@ -728,7 +736,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = { c = false, cpp = false }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -874,28 +882,45 @@ require('lazy').setup({
   --     vim.cmd.hi 'Comment gui=none'
   --   end,
   -- },
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    -- init = function()
-    --   vim.cmd.colorscheme 'catppuccin-mocha'
-    -- end,
-    opts = {
-      background = {
-        dark = 'mocha',
-        light = 'mocha',
-      },
-      mini = {
-        enabled = true,
-        indentscope_color = '',
-      },
-      treesitter = true,
-      telescope = {
-        enabled = true,
-      },
-    },
-  },
+  -- {
+  --   'datsfilipe/vesper.nvim',
+  --   opts = {
+  --     italics = {
+  --       comments = true,
+  --       keywords = false,
+  --       functions = false,
+  --       strings = false,
+  --       variables = false,
+  --     },
+  --   },
+  -- },
+  -- {
+  --   'gerardbm/vim-atomic',
+  --   name = 'atomic',
+  -- },
+  -- {
+  --   'catppuccin/nvim',
+  --   name = 'catppuccin',
+  --   priority = 1000,
+  --   -- init = function()
+  --   --   vim.cmd.colorscheme 'catppuccin-mocha'
+  --   -- end,
+  --   opts = {
+  --     transparent_background = true,
+  --     background = {
+  --       dark = 'mocha',
+  --       light = 'mocha',
+  --     },
+  --     mini = {
+  --       enabled = true,
+  --       indentscope_color = '',
+  --     },
+  --     treesitter = true,
+  --     telescope = {
+  --       enabled = true,
+  --     },
+  --   },
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -1023,59 +1048,36 @@ require('lazy').setup({
   },
 })
 --
--- local dap = require 'dap'
--- dap.adapters.codelldb = {
---   type = 'server',
---   port = '13000',
---   executable = {
---     -- CHANGE THIS to your path!
---     command = '/home/dev/devconfig/extension/adapter/codelldb',
---     args = { '--port', '${port}' },
---
---     -- On windows you may have to uncomment this:
---     -- detached = false,
---   },
--- }
--- dap.configurations.cpp = {
---   {
---     name = 'Launch file',
---     type = 'codelldb',
---     request = 'launch',
---     program = function()
---       return '/home/dev/ds4/ds4/git/build/bin/ds4b-application-server'
---     end,
---     cwd = '${workspaceFolder}',
---     stopOnEntry = false,
---   },
--- }
---
-vim.cmd.colorscheme 'catppuccin-mocha'
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    if vim.env.TMUX then
-      vim.g.clipboard = {
-        name = 'tmux',
-        copy = {
-          ['+'] = 'tmux load-buffer -',
-          ['*'] = 'tmux load-buffer -',
-        },
-        paste = {
-          ['+'] = 'tmux save-buffer -',
-          ['*'] = 'tmux save-buffer -',
-        },
-        cache_enabled = false,
-      }
-      vim.opt.clipboard = 'unnamedplus'
-      print 'Tmux clipboard configured'
-    else
-      print 'Not in tmux session'
-    end
-  end,
-})
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
-      vim.fn.system('tmux load-buffer -', vim.fn.getreg '+')
-    end
-  end,
-})
+-- vim.cmd.colorscheme 'catppuccin-mocha'
+-- vim.cmd.colorscheme 'vesper'
+-- vim.cmd.colorscheme 'atomic'
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function()
+--     if vim.env.TMUX then
+--       vim.g.clipboard = {
+--         name = 'tmux',
+--         copy = {
+--           ['+'] = 'tmux load-buffer -',
+--           ['*'] = 'tmux load-buffer -',
+--         },
+--         paste = {
+--           ['+'] = 'tmux save-buffer -',
+--           ['*'] = 'tmux save-buffer -',
+--         },
+--         cache_enabled = false,
+--       }
+--       vim.opt.clipboard = 'unnamedplus'
+--       print 'Tmux clipboard configured'
+--     else
+--       print 'Not in tmux session'
+--     end
+--   end,
+-- })
+-- vim.api.nvim_create_autocmd('TextYankPost', {
+--   callback = function()
+--     if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
+--       vim.fn.system('tmux load-buffer -', vim.fn.getreg '+')
+--     end
+--   end,
+-- })
+vim.o.diffopt = 'internal,filler,closeoff,linematch:60'
