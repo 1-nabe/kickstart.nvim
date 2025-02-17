@@ -219,32 +219,32 @@ local function setup_default_configurations()
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
     args = {},
-    -- env = {
-    --   DS4_PATH = '/home/dev/ds4/ds4/home',
-    --   DS4_APPLICATION_DIRECTORY = '/home/dev/ds4/ds4/git/build/bin/Debug',
-    --   USAGE_STATISTIC_ACTIVE = 'false',
-    --   DS_OPENTELEMETRY_TRACES_URL = 'https://otelcol.ds4.damp.local/v1/traces',
-    --   DS_OPENTELEMETRY_METRICS_URL = 'https://otelcol.ds4.damp.local/v1/metrics',
-    --   PGHOST = 'localhost',
-    --   PGDATABASE = 'ds4',
-    --   PGUSER = 'postgres',
-    --   PGPASSWORD = 'test',
-    --   DS_UPDATE_ACCEPT_DEV_KEYS = '1',
-    --   DS_MFA_SERVER_URL = 'https://ds4-dev-local.damp.local:443',
-    --   OPENSSL_MODULES = '/home/dev/ds4/ds4/git/build/bin/ossl-modules',
-    --   EASYTI_HOST = 'ds4-dev-local-easyti.damp.local',
-    --   DISABLE_SOLVI_JOB = '1',
-    --   LICENSE_SETUP_TOKEN = '',
-    --   LICENSE_SERVER_HOST = 'ds4-lizenz.ds4.damp.local',
-    --   DS_WIREGUARD_URL = 'https://localhost',
-    --   DS_EASYTI_MANAGER_URL = 'https://ds4-dev-local.damp.local',
-    --   IMPORT_TRANSFER_DISABLE_BACKUP = '1',
-    --   IMPORT_TRANSFER_SIMULATE_SHUTDOWN = '1',
-    --   DS_SOLR_URL = 'http://localhost:8983/solr',
-    --   DS_USE_LOW_AUTH_SECURITY_SETTINGS = 'true',
-    --   HTML_SANITIZER = '',
-    --   DS_SKIP_HILFE_INDEX = '1',
-    -- },
+    env = {
+      DS4_PATH = '/home/dev/ds4/ds4/home',
+      DS4_APPLICATION_DIRECTORY = '/home/dev/ds4/ds4/git/build/bin/Debug',
+      USAGE_STATISTIC_ACTIVE = 'false',
+      DS_OPENTELEMETRY_TRACES_URL = 'https://otelcol.ds4.damp.local/v1/traces',
+      DS_OPENTELEMETRY_METRICS_URL = 'https://otelcol.ds4.damp.local/v1/metrics',
+      PGHOST = 'localhost',
+      PGDATABASE = 'ds4',
+      PGUSER = 'postgres',
+      PGPASSWORD = 'test',
+      DS_UPDATE_ACCEPT_DEV_KEYS = '1',
+      DS_MFA_SERVER_URL = 'https://ds4-dev-local.damp.local:443',
+      OPENSSL_MODULES = '/home/dev/ds4/ds4/git/build/bin/ossl-modules',
+      EASYTI_HOST = 'ds4-dev-local-easyti.damp.local',
+      DISABLE_SOLVI_JOB = '1',
+      LICENSE_SETUP_TOKEN = '',
+      LICENSE_SERVER_HOST = 'ds4-lizenz.ds4.damp.local',
+      DS_WIREGUARD_URL = 'https://localhost',
+      DS_EASYTI_MANAGER_URL = 'https://ds4-dev-local.damp.local',
+      IMPORT_TRANSFER_DISABLE_BACKUP = '1',
+      IMPORT_TRANSFER_SIMULATE_SHUTDOWN = '1',
+      DS_SOLR_URL = 'http://localhost:8983/solr',
+      DS_USE_LOW_AUTH_SECURITY_SETTINGS = 'true',
+      HTML_SANITIZER = '',
+      DS_SKIP_HILFE_INDEX = '1',
+    },
   }
   local ds4_test_lldb_config = {
     name = 'DS4 Tests',
@@ -261,32 +261,32 @@ local function setup_default_configurations()
         return { '--reporter=singleline' }
       end
     end,
-    -- env = {
-    --   DS4_PATH = '/home/dev/ds4/ds4/home',
-    --   DS4_APPLICATION_DIRECTORY = '/home/dev/ds4/ds4/git/build/bin/Debug',
-    --   USAGE_STATISTIC_ACTIVE = 'false',
-    --   DS_OPENTELEMETRY_TRACES_URL = 'https://otelcol.ds4.damp.local/v1/traces',
-    --   DS_OPENTELEMETRY_METRICS_URL = 'https://otelcol.ds4.damp.local/v1/metrics',
-    --   PGHOST = 'localhost',
-    --   PGDATABASE = 'ds4',
-    --   PGUSER = 'postgres',
-    --   PGPASSWORD = 'test',
-    --   DS_UPDATE_ACCEPT_DEV_KEYS = '1',
-    --   DS_MFA_SERVER_URL = 'https://ds4-dev-local.damp.local:443',
-    --   OPENSSL_MODULES = '/home/dev/ds4/ds4/git/build/bin/ossl-modules',
-    --   EASYTI_HOST = 'ds4-dev-local-easyti.damp.local',
-    --   DISABLE_SOLVI_JOB = '1',
-    --   LICENSE_SETUP_TOKEN = '',
-    --   LICENSE_SERVER_HOST = 'ds4-lizenz.ds4.damp.local',
-    --   DS_WIREGUARD_URL = 'https://localhost',
-    --   DS_EASYTI_MANAGER_URL = 'https://ds4-dev-local.damp.local',
-    --   IMPORT_TRANSFER_DISABLE_BACKUP = '1',
-    --   IMPORT_TRANSFER_SIMULATE_SHUTDOWN = '1',
-    --   DS_SOLR_URL = 'http://localhost:8983/solr',
-    --   DS_USE_LOW_AUTH_SECURITY_SETTINGS = 'true',
-    --   HTML_SANITIZER = '',
-    --   DS_SKIP_HILFE_INDEX = '1',
-    -- },
+    env = {
+      DS4_PATH = '/home/dev/ds4/ds4/home',
+      DS4_APPLICATION_DIRECTORY = '/home/dev/ds4/ds4/git/build/bin/Debug',
+      USAGE_STATISTIC_ACTIVE = 'false',
+      DS_OPENTELEMETRY_TRACES_URL = 'https://otelcol.ds4.damp.local/v1/traces',
+      DS_OPENTELEMETRY_METRICS_URL = 'https://otelcol.ds4.damp.local/v1/metrics',
+      PGHOST = 'localhost',
+      PGDATABASE = 'ds4',
+      PGUSER = 'postgres',
+      PGPASSWORD = 'test',
+      DS_UPDATE_ACCEPT_DEV_KEYS = '1',
+      DS_MFA_SERVER_URL = 'https://ds4-dev-local.damp.local:443',
+      OPENSSL_MODULES = '/home/dev/ds4/ds4/git/build/bin/ossl-modules',
+      EASYTI_HOST = 'ds4-dev-local-easyti.damp.local',
+      DISABLE_SOLVI_JOB = '1',
+      LICENSE_SETUP_TOKEN = '',
+      LICENSE_SERVER_HOST = 'ds4-lizenz.ds4.damp.local',
+      DS_WIREGUARD_URL = 'https://localhost',
+      DS_EASYTI_MANAGER_URL = 'https://ds4-dev-local.damp.local',
+      IMPORT_TRANSFER_DISABLE_BACKUP = '1',
+      IMPORT_TRANSFER_SIMULATE_SHUTDOWN = '1',
+      DS_SOLR_URL = 'http://localhost:8983/solr',
+      DS_USE_LOW_AUTH_SECURITY_SETTINGS = 'true',
+      HTML_SANITIZER = '',
+      DS_SKIP_HILFE_INDEX = '1',
+    },
   }
 
   dap.configurations.c = default_lldb_config
@@ -354,7 +354,7 @@ return {
 
     dap.listeners.after.event_initialized['dapui_config'] = function()
       dapui.open()
-      require('edgy').close()
+      -- require('edgy').close()
     end
     dap.listeners.before.event_terminated['dapui_config'] = function()
       dapui.close()
@@ -381,23 +381,25 @@ return {
       dap.terminate()
     end)
 
-    dap.adapters.lldb = {
-      type = 'executable',
-      command = vim.fn.stdpath 'data' .. '/mason/packages/codelldb/extension/adapter/codelldb',
-      -- command = "/Users/neogoose/.local/share/nvim/mason/bin/codelldb",
-      name = 'codelldb',
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = vim.fn.stdpath 'data' .. '/mason/packages/codelldb/extension/adapter/codelldb',
+        args = { '--port', '${port}' },
+      },
     }
 
     vim.keymap.set('n', '<F5>', function()
       setup_default_configurations()
       -- when debug is called firstly try to read and/or update launch.json configuration
       -- from the local project which will override all the default configurations
-      if vim.fn.filereadable '.vscode/launch.json' then
-        require('dap.ext.vscode').load_launchjs(nil, { lldb = { 'rust', 'c', 'cpp' } })
-      else
-        -- If not possible stick to the default prebuilt configurations
-        setup_default_configurations()
-      end
+      -- if vim.fn.filereadable '.vscode/launch.json' then
+      --   require('dap.ext.vscode').load_launchjs(nil, { lldb = { 'rust', 'c', 'cpp' } })
+      -- else
+      -- If not possible stick to the default prebuilt configurations
+      setup_default_configurations()
+      -- end
 
       require('dap').continue()
     end)
