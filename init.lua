@@ -843,11 +843,11 @@ require('lazy').setup({
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    -- init = function()
-    --   vim.cmd.colorscheme 'catppuccin-mocha'
-    -- end,
+    init = function()
+      vim.cmd.colorscheme 'catppuccin-mocha'
+    end,
     opts = {
-      transparent_background = true,
+      -- transparent_background = true,
       background = {
         dark = 'mocha',
         light = 'mocha',
